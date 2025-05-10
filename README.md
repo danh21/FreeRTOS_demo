@@ -1,15 +1,50 @@
-# Description
-Simulate demo operation of FreeRTOS
+# 📦 Project Name
 
-# Software
-- Microsoft Visual Studio
+> FreeRTOS demo.
 
-# Source
+---
+
+## 📚 Table of Contents
+
+- [📦 Project Name](#-project-name)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [📝 About](#-about)
+  - [✨ Features](#-features)
+  - [🚀 Getting Started](#-getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Source](#source)
+    - [Usage](#usage)
+
+---
+
+## 📝 About
+
+> Simulate demo operation of FreeRTOS.
+
+---
+
+## ✨ Features
+
+- ✅ Co-operative scheduling
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- List software dependencies or system requirements here:
+  - FreeRTOS kernel
+  - Microsoft Visual Studio
+
+### Source
+
 - ConsoleApplication: sample application
 - FreeRTOS-Kernel: FreeRTOS kernel implementation
 - copy_specific-files: script to copy source code from **FreeRTOS-Kernel** to **ConsoleApplication**
 
-# How to use
+### Usage
+
 1. *git clone --recurse-submodules git@github.com:danh21/FreeRTOS_demo.git* to clone repo with submodules
 2. In **FreeRTOS-Kernel**/, you can checkout any tags (version of FreeRTOS kernel) for trial. I'm using version 11.2.0
 3. In /**copy_specific-files**/, modify **filelist.txt** to include necessary source files. Then execute **cp_multiFiles.bat** to copy to **ConsoleApplication**.
