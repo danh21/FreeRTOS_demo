@@ -1,0 +1,77 @@
+/*
+	mutex
+	configUSE_PREEMPTION	0
+	configUSE_MUTEXES		1
+
+	1 task accesses CS, does task while another task is waiting for mutex
+	done task -> release mutex for another task
+*/
+
+
+
+// INCLUDE HEADER FILES 
+
+#include <stdio.h>
+#include <conio.h>
+#include "FreeRTOS.h"
+#include "FreeRTOSConfig.h"
+#include "task.h"
+#include "semphr.h"
+
+//FUNCTIONS
+void func_1(void);
+void func_2(void);
+
+SemaphoreHandle_t Sem_Handle;
+TaskHandle_t tsk1;
+TaskHandle_t tsk2;
+
+//MAIN FUNCTION
+int main(void) {
+	Sem_Handle = xSemaphoreCreateMutex(); //initSEM = 1
+	xTaskCreate(func_1, "TASK_1", configMINIMAL_STACK_SIZE, NULL, 3, &tsk1);
+	xTaskCreate(func_2, "TASK_2", configMINIMAL_STACK_SIZE, NULL, 4, &tsk2);
+	vTaskStartScheduler();
+	for (;;);
+}
+
+//TASKS 
+void func_1(void) {
+	int a, b;
+	while (1) {
+		if (xSemaphoreTake(Sem_Handle, pdMS_TO_TICKS(portMAX_DELAY))) {
+			//--------------CS--------------------------
+			printf("\n%s accessed \n", pcTaskGetName(tsk1));
+			printf("TASK 1: Input a,b: ");
+			scanf_s("%d %d", &a, &b);
+			printf("Sum = %d \n", a + b);
+			//------------------------------------------
+			xSemaphoreGive(Sem_Handle);
+		}
+		else {
+			printf("\n%s cannot access \n", pcTaskGetName(tsk1));
+		}
+		printf("Task1 does other task, outside of CS() \n");
+		vTaskDelay(pdMS_TO_TICKS(5000));
+	}
+}
+
+void func_2(void) {
+	int a, b;
+	while (1) {
+		if (xSemaphoreTake(Sem_Handle, pdMS_TO_TICKS(3000))) {
+			//--------------CS--------------------------
+			printf("\n%s accessed \n", pcTaskGetName(tsk2));
+			printf("TASK 2: Input a,b: ");
+			scanf_s("%d %d", &a, &b);
+			printf("Sum = %d \n", a + b);
+			//------------------------------------------
+			xSemaphoreGive(Sem_Handle);
+		}
+		else {
+			printf("\n%s cannot access \n", pcTaskGetName(tsk2));
+		}
+		printf("Task2 does other task, outside of CS() \n");
+		vTaskDelay(pdMS_TO_TICKS(500));
+	}
+}

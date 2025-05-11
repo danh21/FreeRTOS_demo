@@ -56,7 +56,16 @@
     <ClCompile Include="timers.c" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="co-operative_scheduling.txt" />
+    <Text Include="Demo\auto-reload_timer.txt" />
+    <Text Include="Demo\binary_semaphore.txt" />
+    <Text Include="Demo\counting_semaphore_2.txt" />
+    <Text Include="Demo\preemptive.txt" />
+    <Text Include="Demo\priority_schedule.txt" />
+    <Text Include="Demo\counting_semaphore.txt" />
+    <Text Include="Demo\mutex.txt" />
+    <Text Include="Demo\one-shot_timer.txt" />
+    <Text Include="Demo\queue.txt" />
+    <Text Include="Demo\Round_robin.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

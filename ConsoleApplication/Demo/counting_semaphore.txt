@@ -1,9 +1,10 @@
-﻿/*
+/*
 	counting semaphore
 	configUSE_PREEMPTION	1
 	configUSE_COUNTING_SEMAPHORES	1
 
-	3 tasks run one by one, take semaphore, then give to other tasks
+	task 1, task 2 give semaphore
+	task 3 takes semaphore
 */
 
 
@@ -28,12 +29,12 @@ TaskHandle_t tsk3;
 
 //MAIN FUNCTION
 int main(void) {
-	Sem_Handle = xSemaphoreCreateCounting(3, 2); //maxSEM = 2 ; initSEM = 0
+	Sem_Handle = xSemaphoreCreateCounting(2, 0); //maxSEM = 2 ; initSEM = 0
 	// The maximum count value that can be reached is 2
 	// The init count value assigned to the semaphore is 0
 	xTaskCreate(func_1, "TASK_1", configMINIMAL_STACK_SIZE, NULL, 3, &tsk1);
 	xTaskCreate(func_2, "TASK_2", configMINIMAL_STACK_SIZE, NULL, 3, &tsk2);
-	xTaskCreate(func_3, "TASK_3", configMINIMAL_STACK_SIZE, NULL, 3, &tsk3);
+	xTaskCreate(func_3, "TASK_3", configMINIMAL_STACK_SIZE, NULL, 4, &tsk3);
 	vTaskStartScheduler();
 	for (;;);
 }
@@ -41,18 +42,16 @@ int main(void) {
 //TASKS 
 void func_1(void) {
 	while (1) {
-		xSemaphoreTake(Sem_Handle, portMAX_DELAY);
-		printf("%s take SEM\n", pcTaskGetName(tsk1));
-		xSemaphoreGive(Sem_Handle);
+		printf("%s give signal\n", pcTaskGetName(tsk1));
+		xSemaphoreGive(Sem_Handle); //SEM++
 		vTaskDelay(pdMS_TO_TICKS(1000));
 	}
 }
 
 void func_2(void) {
 	while (1) {
-		xSemaphoreTake(Sem_Handle, portMAX_DELAY);
-		printf("%s take SEM\n", pcTaskGetName(tsk2));
-		xSemaphoreGive(Sem_Handle);
+		printf("%s give signal\n", pcTaskGetName(tsk2));
+		xSemaphoreGive(Sem_Handle); //SEM++		
 		vTaskDelay(pdMS_TO_TICKS(1000));
 	}
 }
@@ -61,7 +60,7 @@ void func_3(void) {
 	while (1) {
 		xSemaphoreTake(Sem_Handle, portMAX_DELAY);
 		printf("%s take SEM\n", pcTaskGetName(tsk3));
-		xSemaphoreGive(Sem_Handle);
-		vTaskDelay(pdMS_TO_TICKS(1000));
+		xSemaphoreTake(Sem_Handle, portMAX_DELAY);
+		printf("%s synchronized\n\n", pcTaskGetName(tsk3));
 	}
 }

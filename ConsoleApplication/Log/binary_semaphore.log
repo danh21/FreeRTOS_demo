@@ -1,0 +1,52 @@
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+
+TASK_1 give semaphore, SEM=1
+TASK_2 synchronized, SEM=0
+TASK_1 finish giving semaphore
+

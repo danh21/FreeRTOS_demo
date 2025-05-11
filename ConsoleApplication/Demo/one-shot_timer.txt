@@ -1,0 +1,54 @@
+﻿/*
+	one shot timer
+	configUSE_PREEMPTION	0
+	configUSE_TIMERS	1
+
+	start timer, task 1 runs
+	after config time, timer exprires and ends, task 1 runs continously
+*/
+
+
+
+// INCLUDE HEADER FILES 
+#include <stdio.h>
+#include <conio.h>
+#include "FreeRTOS.h"
+#include "task.h"
+#include "timers.h"
+
+TimerHandle_t Mytimer;
+void func_1(void);
+void Callbackfunction(TimerHandle_t Mytimer);
+
+TaskHandle_t tsk1;
+
+//MAIN FUNCTION
+int main(void) {
+	xTaskCreate(func_1, "TASK_1", configMINIMAL_STACK_SIZE, NULL, 0, &tsk1);
+
+	Mytimer = xTimerCreate("One-shot Timer", pdMS_TO_TICKS(2000), pdFALSE, 0, Callbackfunction);
+	//name 
+	//period
+	//True - AutoReload -> False - One-shot
+	//ID = 0
+	//timer đến thì gọi hàm
+
+	xTimerStart(Mytimer, portMAX_DELAY); //chạy timer
+	// nếu > 20 timers thì queue bị treo
+	printf("\n: Starting Timer ... \n");
+
+	vTaskStartScheduler();
+	for (;;);
+}
+
+//TASKS 
+void func_1(void) {
+	while (1) {
+		printf("\n %s IS RUNNING  \n", pcTaskGetName(tsk1));
+		vTaskDelay(pdMS_TO_TICKS(1000));
+	}
+}
+
+void Callbackfunction(TimerHandle_t Mytimer) {
+	printf("Timer expired (after 2 seconds) \n");
+}

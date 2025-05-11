@@ -1,0 +1,49 @@
+/*
+	binary semaphore 
+	2 tasks
+*/
+
+
+
+// INCLUDE HEADER FILES 
+// #define configUSE_PREEMPTION	0 in freeRTOSConfig
+#include <stdio.h>
+#include <conio.h>
+#include "FreeRTOS.h"
+#include "FreeRTOSConfig.h"
+#include "task.h"
+#include "semphr.h"
+
+//FUNCTIONS
+void func_1(void);
+void func_2(void);
+
+xSemaphoreHandle Sem_Handle;
+TaskHandle_t tsk1;
+TaskHandle_t tsk2;
+
+//MAIN FUNCTION
+int main(void) {
+	Sem_Handle = xSemaphoreCreateBinary();
+	xTaskCreate(func_1, "TASK_1", configMINIMAL_STACK_SIZE, NULL, 3, &tsk1);
+	xTaskCreate(func_2, "TASK_2", configMINIMAL_STACK_SIZE, NULL, 4, &tsk2);
+	vTaskStartScheduler();
+	for (;;);
+}
+
+//TASKS 
+void func_1(void) {
+	while (1) {
+		printf("%s give semaphore, SEM=1 \n", pcTaskGetName(tsk1));
+		xSemaphoreGive(Sem_Handle);
+		printf("%s finish giving semaphore \n\n", pcTaskGetName(tsk1));
+		vTaskDelay(pdMS_TO_TICKS(1000));
+	}
+}
+
+void func_2(void) {
+	while (1) {
+		xSemaphoreTake(Sem_Handle, portMAX_DELAY);
+		printf("%s synchronized, SEM=0 \n", pcTaskGetName(tsk2));
+	}
+}

@@ -1,0 +1,55 @@
+﻿/*
+	QUEUE
+	configQUEUE_REGISTRY_SIZE 10
+	configUSE_QUEUE_SETS	1
+	configUSE_PREEMPTION	0
+
+	task 1 sends to queue
+	task 2 receives from queue
+*/
+
+
+
+// INCLUDE HEADER FILES 
+#include <stdio.h>
+#include <conio.h>
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+void func_1(void* params);
+void func_2(void* params);
+
+TaskHandle_t tsk1;
+TaskHandle_t tsk2;
+QueueHandle_t Queue_Handle;
+
+//MAIN FUNCTION
+int main(void) {
+	Queue_Handle = xQueueCreate(5, sizeof(int)); // 5 elements
+	xTaskCreate(func_1, "TASK_1", configMINIMAL_STACK_SIZE, NULL, 2, &tsk1);
+	xTaskCreate(func_2, "TASK_2", configMINIMAL_STACK_SIZE, NULL, 1, &tsk2);
+	vTaskStartScheduler();
+	for (;;);
+}
+
+//TASKS 
+void func_1(void* params) {
+	int data = 1;
+	while (1) {
+		if (xQueueSend(Queue_Handle, &data, portMAX_DELAY) == pdPASS)
+			printf("%s sends data: %d - Free: %d\n", pcTaskGetName(tsk1), data++, uxQueueSpacesAvailable(Queue_Handle));
+		else
+			printf("Failed to send to queue\n");
+	}
+}
+
+void func_2(void* params) {
+	int rx = 0;
+	while (1) {
+		if (xQueueReceive(Queue_Handle, &rx, pdMS_TO_TICKS(500)) == pdPASS)
+			printf("%s receives data: %d - Free: %d\n", pcTaskGetName(tsk2), rx, uxQueueSpacesAvailable(Queue_Handle));
+		else
+			printf("Failed to receive data from queue\n");
+	}
+}

@@ -1,0 +1,46 @@
+
+TASK_2 accessed
+TASK 2: Input a,b: 3
+4
+Sum = 7
+Task2 does other task, outside of CS()
+
+TASK_1 accessed
+TASK 1: Input a,b: 2
+3
+Sum = 5
+Task1 does other task, outside of CS()
+
+TASK_2 accessed
+TASK 2: Input a,b: 1
+2
+Sum = 3
+Task2 does other task, outside of CS()
+
+TASK_1 accessed
+TASK 1: Input a,b: 1
+1
+Sum = 2
+Task1 does other task, outside of CS()
+
+TASK_2 accessed
+TASK 2: Input a,b: 1
+1
+Sum = 2
+Task2 does other task, outside of CS()
+
+TASK_2 accessed
+TASK 2: Input a,b: 1
+1
+Sum = 2
+Task2 does other task, outside of CS()
+
+TASK_2 accessed
+TASK 2: Input a,b: 1
+
+1
+Sum = 2
+Task2 does other task, outside of CS()
+
+TASK_1 accessed
+TASK 1: Input a,b:

@@ -118,7 +118,34 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="co-operative_scheduling.txt">
+    <Text Include="Demo\Round_robin.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Demo\priority_schedule.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Demo\auto-reload_timer.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Demo\binary_semaphore.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Demo\counting_semaphore.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Demo\mutex.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Demo\one-shot_timer.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Demo\queue.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Demo\preemptive.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Demo\counting_semaphore_2.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

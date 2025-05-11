@@ -1,4 +1,4 @@
-﻿/*
+/*
 	counting semaphore
 	configUSE_PREEMPTION	1
 	configUSE_COUNTING_SEMAPHORES	1
